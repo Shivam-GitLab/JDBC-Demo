@@ -28,10 +28,12 @@ public class JDBCDemo {
         // try with resources
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD)) {
             System.out.println("Connected to the Database!");
-            insertStudent(conn, "Alice", "alice@gmail.com");
-            updateStudent(conn, 2, "Bob", "alice@gmail.com");
+
+//            insertStudent(conn, "Alice", "alice@gmail.com");
+//            insertStudent(conn, "Bob", "bob@gmail.com");
+            updateStudent(conn, 2, "SM", "alice@gmail.com");
             selectStudents(conn);
-            deleteStudent(conn,1);
+//            deleteStudent(conn,1);
         } catch (SQLException e) {
             System.err.println("❌ Database operation failed");
             System.err.println("Error Message: " + e.getMessage());
@@ -40,7 +42,14 @@ public class JDBCDemo {
 
     // CRUD Operations - Create, Read, Update, Delete
     // Create - INSERT operation
-    private static void insertStudent(Connection conn, String name, String email) {
+    private static void insertStudent(Connection conn, String name, String email) throws SQLException {
+   /*     String sql = "INSERT INTO STUDENT (NAME, EMAIL) VALUES (?, ?)";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setString(1, name);
+        ps.setString(2, email);
+
+        ps.executeUpdate();
+*/
         String sql = "INSERT INTO STUDENT (name, email) VALUES ('" + name + "','" + email + "')";
         try (Statement stmt = conn.createStatement()) {
             int rows = stmt.executeUpdate(sql);

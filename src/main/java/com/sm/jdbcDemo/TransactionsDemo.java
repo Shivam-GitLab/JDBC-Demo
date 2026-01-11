@@ -82,7 +82,5 @@ public class TransactionsDemo {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-
     }
 }
